@@ -28,11 +28,11 @@ const Hero: React.FC = () => {
       </div>
       <div className="hero__image-container">
         <div className="hero__image-placeholder">
-          {/* 2. <img> etiketini buraya ekleyin */}
           <img
             src={heroImage}
             alt="Enoca Frontend Challenge Görseli"
             className="hero__image"
+            loading="lazy"
           />
         </div>
       </div>
