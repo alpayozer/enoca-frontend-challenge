@@ -1,73 +1,96 @@
-# React + TypeScript + Vite
+# Enoca Frontend Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, Enoca Frontend Challenge gereksinimlerini karşılamak amacıyla hazırlanmış bir landing sayfası ve UI bileşen kütüphanesi çalışmasıdır.
 
-Currently, two official plugins are available:
+Proje, PDF belgesinde belirtilen tüm ana gereksinimleri karşılamaktadır:
+* Tek sayfalık, 5 bölümlü bir landing sayfası (Hero, Özellikler, Fiyatlar, SSS, İletişim)[cite: 4].
+* Yeniden kullanılabilir 5 UI bileşeni (Button, Input, Card, Modal, Accordion)[cite: 5].
+* Mobil-öncelikli (Mobile-First) responsive tasarım[cite: 6].
+* Light/Dark tema desteği (CSS Değişkenleri ile)[cite: 7].
+* Yalın JS (React State) ile basit form doğrulaması[cite: 8].
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## 🚀 Canlı Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Projenin Vercel/Netlify üzerinden deploy edilmiş canlı versiyonuna buradan ulaşabilirsiniz:
 
-## Expanding the ESLint configuration
+**[netlify-link](netlify-link)**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Kullanılan Teknolojiler
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* **Build Aracı:** Vite
+* **Framework:** React
+* **Stil:** SCSS (BEM metodolojisi ile)
+* **Versiyon Kontrol:** Git & GitHub (Conventional Commits & PR Akışı)
+* **Erişilebilirlik & SEO:** Semantik HTML, ARIA, Meta Etiketleri
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📦 Kurulum ve Çalıştırma
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1.  Depoyu yerel makinenize klonlayın:
+    ```bash
+    git clone https://github.com/alpayozer/enoca-frontend-challenge.git
+    cd enoca-frontend-challenge
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2.  Gerekli NPM paketlerini yükleyin:
+    ```bash
+    npm install
+    ```
+
+3.  Projeyi geliştirme modunda (development) çalıştırın:
+    ```bash
+    npm run dev
+    ```
+
+4.  Üretim (production) build'i almak için:
+    ```bash
+    npm run build
+    ```
+
+---
+
+## 🏛️ Kısa Mimari Notlar
+
+* **Bileşen (Component) Yapısı:**
+    * Tüm yeniden kullanılabilir, saf UI elemanları (Button, Input, Card, Modal, Accordion) `src/components` klasörü altında geliştirilmiştir. Bu bileşenler "props" aracılığıyla yapılandırılabilir durumdadır.
+    * Landing sayfasının ana bölümleri (Hero, Features, Pricing vb.) `src/sections` klasörü altında, `components` klasöründeki bileşenleri kullanarak "akıllı" bileşenler olarak oluşturulmuştur.
+
+* **Stil (SCSS):**
+    * Gereksinimlerde belirtildiği gibi **SCSS zorunluluğuna** uyulmuştur.
+    * `src/styles/_theme.scss` dosyası, CSS Değişkenlerini kullanarak Light/Dark tema renk paletini yönetir.
+    * Bileşen stilleri, BEM metodolojisine uygun olarak kendi `.scss` dosyalarında (component-scoped) tutulmuştur.
+
+* **Duyarlı Tasarım (Responsive):**
+    * **Mobil-öncelikli (Mobile-First)** yaklaşım benimsenmiştir.
+    * Gereksinimlerde belirtilen 3 breakpoint (≤640, 641-1024, ≥1025) için `media query`'ler kullanılmıştır.
+
+* **Versiyon Kontrol:**
+    * `main` dalı korumalı olarak ayarlanmıştır.
+    * Tüm geliştirmeler `dev` dalı üzerinden yürütülmüştür.
+    * Özellikler `feat/*`, düzeltmeler ise `fix/*` dallarında geliştirilip, Conventional Commits formatına uygun olarak PR (Pull Request) ile `dev` dalına birleştirilmiştir.
+
+---
+
+## 📝 Karar Kayıtları (ADR)
+
+* **ADR-001 (Framework Seçimi):**
+    * **Karar:** `Vite + React` seçildi.
+    * **Gerekçe:** PDF'te sunulan seçenekler (Vanilla TS, React, Angular) arasından React, "yeniden kullanılabilir UI bileşenleri" oluşturma hedefi için en uygun, modern ve esnek ekosistemi sunmaktadır.
+
+* **ADR-002 (Stil Metodolojisi):**
+    * **Karar:** BEM ile birlikte bileşen-bazlı SCSS.
+    * **Gerekçe:** PDF'te BEM veya CSS Modules/SCSS önerilmişti. BEM, hızlı geliştirme, net bir isimlendirme standardı ve SCSS'in iç içe (nesting) özellikleriyle birleştiğinde yüksek okunabilirlik sağlaması nedeniyle tercih edildi.
+
+---
+
+## 📊 Lighthouse Raporu
+
+Proje teslimatları arasında istenen Lighthouse raporu ekran görüntüsü ve performans hedefine ulaşıldığını gösteren sonuç aşağıdadır.
+
+Gerekli tüm SEO (meta, robots.txt) ve performans (fetchpriority, kontrast) iyileştirmeleri yapılmıştır.
+
+![Lighthouse Raporu](./src/assets/lighthouse.png)
