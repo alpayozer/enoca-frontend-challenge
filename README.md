@@ -12,9 +12,9 @@ Proje, PDF belgesinde belirtilen tüm ana gereksinimleri karşılamaktadır:
 
 ## 🚀 Canlı Demo
 
-Projenin Vercel/Netlify üzerinden deploy edilmiş canlı versiyonuna buradan ulaşabilirsiniz:
+Projenin Netlify üzerinden deploy edilmiş canlı versiyonuna buradan ulaşabilirsiniz:
 
-**[netlify-link](netlify-link)**
+**[Netlify Link](https://enoca-frontend-challange.netlify.app/)**
 
 ---
 
