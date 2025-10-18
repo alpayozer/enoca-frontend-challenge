@@ -6,9 +6,8 @@ type CardProps = {
   price: string;
   priceDescription?: string;
   features: string[];
-  // Önceki adımda yaptığımız Button bileşenini buraya prop olarak geçireceğiz
   cta: React.ReactNode;
-  isFeatured?: boolean; // Fiyat kartını öne çıkarmak için
+  isFeatured?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -19,7 +18,6 @@ const Card: React.FC<CardProps> = ({
   cta,
   isFeatured = false,
 }) => {
-  // BEM modifier kullanarak öne çıkan kartı belirliyoruz
   const className = `card ${isFeatured ? "card--featured" : ""}`;
 
   return (
