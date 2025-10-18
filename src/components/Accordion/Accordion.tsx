@@ -1,10 +1,10 @@
-import React, { useState, useRef, useId } from "react";
+import React, { useState, useRef, useId, useEffect } from "react";
 import "./Accordion.scss";
 
 type AccordionProps = {
   title: string;
   children: React.ReactNode;
-  defaultOpen?: boolean; // İsteğe bağlı, varsayılan açık mı?
+  defaultOpen?: boolean;
 };
 
 const Accordion: React.FC<AccordionProps> = ({
@@ -13,23 +13,24 @@ const Accordion: React.FC<AccordionProps> = ({
   defaultOpen = false,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-
-  // İçerik alanının yüksekliğini dinamik olarak almak için
+  const [contentHeight, setContentHeight] = useState("0px");
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // Erişilebilirlik için benzersiz ID'ler oluşturma
   const panelId = useId();
   const headerId = useId();
 
+  useEffect(() => {
+    if (contentRef.current) {
+      if (isOpen) {
+        const height = `${contentRef.current.scrollHeight}px`;
+        setContentHeight(height);
+      } else {
+        setContentHeight("0px");
+      }
+    }
+  }, [isOpen]);
+
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
-  };
-
-  // İçerik yüksekliğini ayarla
-  const contentStyle = {
-    // 'isOpen' true ise 'scrollHeight' (içeriğin gerçek yüksekliği)
-    // false ise 0 olarak ayarla.
-    maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0px",
   };
 
   return (
@@ -40,20 +41,21 @@ const Accordion: React.FC<AccordionProps> = ({
           className="accordion__header"
           onClick={toggleAccordion}
           aria-expanded={isOpen}
-          aria-controls={panelId} // Hangi paneli kontrol ettiğini belirtir
+          aria-controls={panelId}
         >
           <span className="accordion__title">{title}</span>
           <span className="accordion__icon" aria-hidden="true"></span>
         </button>
       </h3>
+
       <div
         id={panelId}
         ref={contentRef}
         className="accordion__content-wrapper"
-        style={contentStyle}
-        role="region" // Bu alanın bir bölge olduğunu belirtir
-        aria-labelledby={headerId} // Hangi başlığa ait olduğunu belirtir
-        hidden={!isOpen} // Ekran okuyucular için
+        style={{ maxHeight: contentHeight }}
+        role="region"
+        aria-labelledby={headerId}
+        hidden={!isOpen}
       >
         <div className="accordion__content-inner">{children}</div>
       </div>

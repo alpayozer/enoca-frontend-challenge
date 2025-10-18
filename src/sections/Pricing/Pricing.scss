@@ -1,0 +1,19 @@
+.pricing__grid {
+  display: grid;
+  gap: 1.5rem;
+
+  grid-template-columns: 1fr;
+
+  max-width: 450px;
+  margin: 0 auto; 
+
+  @media (min-width: 641px) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+  }
+
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+  }
+}
